@@ -5,10 +5,9 @@ bash traj.bash num_iterations path_lammp_exc"
 
 
 # Simulation Video
-<video width="320" height="240" controls>
-  <source src="vids/vid1.mov" type="video/mp4">
-</video>
+## Injection into spherical container
+https://github.com/user-attachments/assets/f33bbbc8-4c2a-4260-affb-3cfe8dda83e5
 
-<video width="320" height="240" controls>
-  <source src="vids/vid2.mov" type="video/mp4">
-</video>
+## Injection closeup
+https://github.com/user-attachments/assets/8a339de7-b641-4190-af24-03f1d9e575c9
+
