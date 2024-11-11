@@ -1,0 +1,9 @@
+region spheAc sphere 0 0 95.60693338982782 80 side out
+region spheB sphere 0 0 95.60693338982782 79.95 side in
+region spheA sphere 0 0 95.60693338982782 80 side in
+region spheBc sphere 0 0 95.60693338982782 79.95 side out
+region cylA cylinder z 0 0 1.25 11.105933389827808 21.105933389827808 side in
+region cylB cylinder z 0 0 0.75 11.105933389827808 21.105933389827808 side in
+region shell union 3 spheAc spheB cylA
+region shell1 union 3 spheAc spheB cylB
+fix wall all wall/region shell lj126 3.0 1.0 1.22

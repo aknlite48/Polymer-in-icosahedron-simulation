@@ -1,0 +1,312 @@
+shell rm angle_approach.txt 
+shell rm capsid_force.txt 
+shell rm capsid_velocity.txt
+shell rm capsid_pressure.txt 
+shell rm tail_force.txt 
+shell rm tail_pressure.txt
+shell rm tail_velocity.txt
+shell rm pack_fraction.txt
+shell rm xyz_50.txt
+shell rm xyz_150.txt
+shell rm xyz_250.txt
+shell rm xyz_350.txt
+shell rm dist_com.txt
+shell rm netvz.txt
+shell rm netfz.txt
+shell rm ini_count.txt
+shell rm exit_radial_dist.txt
+shell rm caps_energy.txt
+shell rm poly_energy.txt
+shell rm tail_energy.txt
+
+
+
+units lj
+atom_style full
+#pair_style lj/cut 2.5
+boundary p p p
+
+#region simbox block -50 50 -50 50 -50 50
+#create_box 1 simbox
+read_data poly_in_iso.data
+include ico_zone.lam
+include tail_zone.lam
+include ico_volume.lam
+group poly type 1 
+group ico  type 2
+group crow type 3
+group poly1 id 1
+group poly400 id 400
+group Capsid dynamic poly region icoregion
+group Tail dynamic poly region tail_region
+
+#change_box crowper boundary p p p
+#change_box all x final -50 50 y -50 50 z -50 70 boundary p p p 
+
+#set group poly image 0 0 0
+
+#neighbor       4 bin
+neigh_modify   every 1 delay 0 check yes
+neigh_modify   exclude type 2 2
+neigh_modify   exclude type 1 3
+neigh_modify   exclude type 3 3
+neigh_modify   exclude type 2 3
+#for injection above
+
+
+include region_specify.lam
+#include sphere_region.lam
+
+#include        param-neutral-polymer-good.prm
+include        param_elec_hybrid.prm
+pair_coeff      1 3 0.000000 1.000000 1.1220000000
+#include 	param_elec_new.prm
+#include 	sample.prm
+velocity       all create 1.0 29425
+
+thermo 10000
+thermo_modify lost ignore
+thermo_modify lost/bond ignore
+timestep 0.001
+dump trajectory all atom 1000 dump_elec.lammpstrj
+
+#injection
+fix icofreeze ico setforce 0.0 0.0 0.0
+fix crowfreeze crow setforce 0.0 0.0 0.0
+#equiblration
+#fix injruneq poly nvt temp 0.5 0.6 1.0
+#fix bead400freeze poly400 setforce 0 0 0
+#run 200000
+#unfix injruneq
+#unfix bead400freeze
+variable caps_count equal count(Capsid)
+fix inmotor poly addforce 0 0 -80 region cyl2
+fix injrun poly nvt temp 1.0 1.0 1.0
+fix inp_tr1 all print 1000 "${caps_count}" append ini_count.txt screen yes
+fix ih1 all halt 1 v_caps_count > 391 error continue message yes
+
+run 2000000
+unfix ih1
+#unfix beadfreeze1
+unfix inp_tr1
+unfix inmotor
+unfix crowfreeze
+unfix injrun
+#unfix equilbrator
+
+
+#equilibriation
+neigh_modify   exclude none
+neigh_modify   exclude type 2 2
+include sphere_region.lam
+pair_coeff      1 3 1.000000 1.000000 1.1220000000
+velocity       all create 1.0 29425
+fix beadfreeze1 poly1 setforce 0.0 0.0 0.0
+min_modify     dmax 0.001
+minimize       1e-28 1e-28 1000 100000000
+fix equilibrator poly nvt temp 1.0 1.0 1.0
+run 300
+unfix equilibrator
+unfix beadfreeze1
+
+#equilibrium beads
+fix polyfreeze poly setforce 0.0 0.0 0.0
+fix equilibrator_1 crow nvt temp 1.0 1.0 1.0
+run 20000
+unfix equilibrator_1
+unfix polyfreeze
+
+
+#production
+include motor_f.prm
+fix integrator1 poly nvt temp 1.0 1.0 1.0
+fix integrator2 crow nvt temp 1.0 1.0 1.0
+
+#pressure_capsid
+compute p1 Capsid stress/atom NULL
+compute p2 Capsid reduce sum c_p1[1] c_p1[2] c_p1[3]
+variable press_capsid equal -(c_p2[1]+c_p2[2]+c_p2[3])/(3*${volico})
+fix p3 all print 1000 "${press_capsid}" append capsid_pressure.txt screen no
+
+#pressure_tail
+compute p4 Tail stress/atom NULL
+compute p5 Tail reduce sum c_p4[1] c_p4[2] c_p4[3]
+variable press_tail equal -(c_p5[1]+c_p5[2]+c_p5[3])/(3*${voltail})
+fix p6 all print 1000 "${press_tail}" append tail_pressure.txt screen no
+
+#com
+compute cm1 poly com
+variable cmpos equal sqrt((c_cm1[1])^2+(c_cm1[2])^2+(c_cm1[3])^2)
+fix cm2 all print 1000 "${cmpos}" append dist_com.txt screen no
+
+#net velocity_z
+compute cv1 poly property/atom vz
+compute cv2 poly reduce sum c_cv1
+variable netvz equal c_cv2
+fix cv3 all print 1000 "${netvz}" append netvz.txt screen no
+
+#net force_z
+compute cf1 poly property/atom fz
+compute cf2 poly reduce sum c_cf1
+variable netfz equal c_cf2
+fix cf3 all print 1000 "${netfz}" append netfz.txt screen no
+
+variable capsid_loc equal (401-count(Capsid))
+variable capsid_locp equal (400-count(Capsid))
+#variable capsid_loc
+variable capsid_loc1 equal (402-count(Capsid))
+variable capsid_loc2 equal (403-count(Capsid))
+variable tail_loc equal (401-count(Tail)-count(Capsid))
+variable tail_loc1 equal (411-count(Tail)-count(Capsid))
+
+#compute in_capsid poly chunk/atom type region icoregion compress yes
+#compute in_tail poly chunk/atom type region tail_region compress yes
+
+#compute in_capsid1 poly property/chunk in_capsid id
+
+
+#variable capsid_loc vector c_in_capsid
+#variable tail_loc vector c_in_tail
+
+
+#force_capsid
+#compute f1 Capsid property/atom fx fy fz
+#variable force_capsid equal sqrt((c_f1[v_capsid_loc][1])^2+(c_f1[v_capsid_loc][2])^2+(c_f1[v_capsid_loc][3])^2)
+#fix f2 all print 1000 "${force_capsid}" append capsid_force.txt screen no
+
+#force_tail
+#compute f3 Tail property/atom fx fy fz
+#variable force_tail equal sqrt((c_f3[v_tail_loc][1])^2+(c_f3[v_tail_loc][2])^2+(c_f3[v_tail_loc][3])^2)
+#fix f4 all print 1000 "${force_tail}" append tail_force.txt screen no
+
+#velocity_capsid
+#compute v1 Capsid property/atom vx vy vz
+#variable vel_capsid equal sqrt((C_v1[v_capsid_loc][1])^2+(C_v1[v_capsid_loc][2])^2+(C_v1[v_capsid_loc][3])^2)
+#fix v2 all print 1000 "${vel_capsid}" append capsid_velocity.txt screen no
+
+
+#velocity_tail
+#compute v3 Tail property/atom vx vy vz
+#variable vel_tail equal sqrt((c_v3[v_tail_loc][1])^2+(c_v3[v_tail_loc][2])^2+(c_v3[v_tail_loc][3])^2)
+#fix v4 all print 1000 "${vel_tail}" append tail_velocity.txt screen no
+
+
+compute rad1 Capsid property/atom x y
+variable rd1 equal sqrt((C_rad1[v_capsid_loc][1])^2+(C_rad1[v_capsid_loc][2])^2)
+variable rd2 equal sqrt((C_rad1[v_capsid_loc1][1])^2+(C_rad1[v_capsid_loc1][2])^2)
+variable rd3 equal sqrt((C_rad1[v_capsid_loc2][1])^2+(C_rad1[v_capsid_loc2][2])^2)
+fix rad2 all print 1000 "${rd1} ${rd2} ${rd3}" append exit_radial_dist.txt screen no
+
+#packing fraction
+variable pack1 equal count(Capsid)
+fix pa1 all print 1000 "${pack1}" append pack_fraction.txt screen yes
+
+#rdf
+#compute rdf1 Capsid rdf
+
+
+#energy
+compute epp1 poly pe/atom pair
+compute epp2 poly pe/atom bond
+compute epp3 poly pe/atom angle
+compute ecc1 Capsid pe/atom pair 
+compute ecc2 Capsid pe/atom bond
+compute ecc3 Capsid pe/atom angle
+compute ett1 Tail pe/atom pair 
+compute ett2 Tail pe/atom bond
+compute ett3 Tail pe/atom angle
+compute ep1 poly reduce sum c_epp1
+compute ep2 poly reduce sum c_epp2
+compute ep3 poly reduce sum c_epp3
+compute ec1 Capsid reduce sum c_ecc1
+compute ec2 Capsid reduce sum c_ecc2
+compute ec3 Capsid reduce sum c_ecc3
+compute et1 Tail reduce sum c_ett1
+compute et2 Tail reduce sum c_ett2
+compute et3 Tail reduce sum c_ett3
+variable ep1 equal c_ep1
+variable ep2 equal c_ep2
+variable ep3 equal c_ep3
+variable ec1 equal c_ec1
+variable ec2 equal c_ec2
+variable ec3 equal c_ec3
+variable et1 equal c_et1
+variable et2 equal c_et2
+variable et3 equal c_et3
+fix ep all print 1000 "${ep1} ${ep2} ${ep3}" append poly_energy.txt screen no
+fix ec all print 1000 "${ec1} ${ec2} ${ec3}" append caps_energy.txt screen no
+fix et all print 1000 "${et1} ${et2} ${et3}" append tail_energy.txt screen no
+
+#angle of approach
+#variable av_beads equal count(Capsid)
+#if "${av_beads} > 1" 
+#compute a1 Capsid property/atom x y z
+#variable capsid_loc equal (401-count(Capsid))
+#variable pos1 atom c_a1[370]
+#variable pos2 atom c_a1[371]
+#variable theta equal acos((v_pos1[3]-v_pos2[3])/((v_pos1[1]-v_pos2[1])^2+(v_pos1[2]-v_pos2[2])^2+(v_pos1[3]-v_pos2[3])^2))
+#fix a2 all print 1000 "${theta}" append angle_approach.txt screen no
+#variable capsid_loc delete
+#variable capsid_loc1 delete
+
+#angle_of_approach
+compute an1 poly property/atom x
+compute an2 poly property/atom y
+compute an3 poly property/atom z
+variable x1 equal C_an1[v_capsid_locp]
+variable y1 equal C_an2[v_capsid_locp]
+variable z1 equal C_an3[v_capsid_locp]
+variable x2 equal C_an1[v_capsid_loc]
+variable y2 equal C_an2[v_capsid_loc]
+variable z2 equal C_an3[v_capsid_loc]
+variable mag12 equal (sqrt(((v_x1-v_x2)^2)+((v_y1-v_y2)^2)+((v_z1-v_z2)^2)))
+variable theta equal (180/PI)*(acos((v_z1-v_z2)/v_mag12))
+
+fix an4 all print 1000 "${theta}" append angle_approach.txt screen no
+
+#trajectories
+compute tr poly property/atom x y z
+variable x50 equal C_tr[50][1] 
+variable y50 equal C_tr[50][2] 
+variable z50 equal C_tr[50][3]
+variable x150 equal C_tr[150][1] 
+variable y150 equal C_tr[150][2] 
+variable z150 equal C_tr[150][3]
+variable x250 equal C_tr[250][1] 
+variable y250 equal C_tr[250][2] 
+variable z250 equal C_tr[250][3]
+variable x350 equal C_tr[350][1] 
+variable y350 equal C_tr[350][2] 
+variable z350 equal C_tr[350][3]
+fix tr1 all print 1000 "${x50} ${y50} ${z50}" append xyz_50.txt screen no
+fix tr2 all print 1000 "${x150} ${y150} ${z150}" append xyz_150.txt screen no
+fix tr3 all print 1000 "${x250} ${y250} ${z250}" append xyz_250.txt screen no
+fix tr4 all print 1000 "${x350} ${y350} ${z350}" append xyz_350.txt screen no
+
+
+#dump trajectory all atom 1000 dump_elec.lammpstrj
+fix h1 all halt 1 v_pack1 < 1 error continue message yes
+run 1500000
+unfix p3
+unfix p6
+unfix cm2
+unfix cv3
+unfix cf3
+unfix h1
+#unfix f2
+#unfix f4
+#unfix v2
+#unfix v4
+unfix pa1
+unfix an4
+unfix rad2
+unfix ep
+unfix ec
+unfix et
+
+fix h2 all halt 1 v_tail_loc < 1 error continue message yes
+run 50000
+unfix h2
+
+
+run 3000

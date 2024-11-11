@@ -1,0 +1,23 @@
+set group poly charge 0
+#set group crow charge 0.1
+dielectric 1.0
+
+special_bonds	fene dihedral no
+bond_style	fene
+bond_coeff      1 30.0 1.5 1.0 1.0
+
+include		angle_p.prm
+
+pair_style      lj/cut 1.122462048309373
+pair_modify	shift yes
+#kspace_style	ewald 1e-6
+
+pair_coeff      1 1 1.000000 1.000000 1.1220000000
+#pair_coeff      1 1 yukawa 0.17857142857
+pair_coeff      1 2 2.000000 1.000000 1.1220000000
+pair_coeff      1 3 1.000000 1.000000 1.1220000000
+#pair_coeff      1 3 coul/debye 3
+pair_coeff      2 2 0.000000 1.000000 1.1220000000
+pair_coeff      2 3 1.000000 1.000000 1.1220000000
+pair_coeff      3 3 1.000000 1.000000 1.1220000000
+#pair_coeff      3 3 coul/debye 3

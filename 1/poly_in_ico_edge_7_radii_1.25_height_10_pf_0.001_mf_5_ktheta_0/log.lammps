@@ -1,0 +1,1619 @@
+LAMMPS (29 Aug 2024 - Development - patch_29Aug2024-722-g6d634dc646)
+shell rm angle_approach.txt
+WARNING: Shell command 'rm angle_approach.txt' failed with error 'No such file or directory' (../input.cpp:1288)
+shell rm capsid_force.txt
+WARNING: Shell command 'rm capsid_force.txt' failed with error 'No such file or directory' (../input.cpp:1288)
+shell rm capsid_velocity.txt
+WARNING: Shell command 'rm capsid_velocity.txt' failed with error 'No such file or directory' (../input.cpp:1288)
+shell rm capsid_pressure.txt
+WARNING: Shell command 'rm capsid_pressure.txt' failed with error 'No such file or directory' (../input.cpp:1288)
+shell rm tail_force.txt
+WARNING: Shell command 'rm tail_force.txt' failed with error 'No such file or directory' (../input.cpp:1288)
+shell rm tail_pressure.txt
+WARNING: Shell command 'rm tail_pressure.txt' failed with error 'No such file or directory' (../input.cpp:1288)
+shell rm tail_velocity.txt
+WARNING: Shell command 'rm tail_velocity.txt' failed with error 'No such file or directory' (../input.cpp:1288)
+shell rm pack_fraction.txt
+WARNING: Shell command 'rm pack_fraction.txt' failed with error 'No such file or directory' (../input.cpp:1288)
+shell rm xyz_50.txt
+WARNING: Shell command 'rm xyz_50.txt' failed with error 'No such file or directory' (../input.cpp:1288)
+shell rm xyz_150.txt
+WARNING: Shell command 'rm xyz_150.txt' failed with error 'No such file or directory' (../input.cpp:1288)
+shell rm xyz_250.txt
+WARNING: Shell command 'rm xyz_250.txt' failed with error 'No such file or directory' (../input.cpp:1288)
+shell rm xyz_350.txt
+WARNING: Shell command 'rm xyz_350.txt' failed with error 'No such file or directory' (../input.cpp:1288)
+shell rm dist_com.txt
+WARNING: Shell command 'rm dist_com.txt' failed with error 'No such file or directory' (../input.cpp:1288)
+shell rm netvz.txt
+WARNING: Shell command 'rm netvz.txt' failed with error 'No such file or directory' (../input.cpp:1288)
+shell rm netfz.txt
+WARNING: Shell command 'rm netfz.txt' failed with error 'No such file or directory' (../input.cpp:1288)
+shell rm ini_count.txt
+WARNING: Shell command 'rm ini_count.txt' failed with error 'No such file or directory' (../input.cpp:1288)
+shell rm exit_radial_dist.txt
+WARNING: Shell command 'rm exit_radial_dist.txt' failed with error 'No such file or directory' (../input.cpp:1288)
+shell rm caps_energy.txt
+WARNING: Shell command 'rm caps_energy.txt' failed with error 'No such file or directory' (../input.cpp:1288)
+shell rm poly_energy.txt
+WARNING: Shell command 'rm poly_energy.txt' failed with error 'No such file or directory' (../input.cpp:1288)
+shell rm tail_energy.txt
+WARNING: Shell command 'rm tail_energy.txt' failed with error 'No such file or directory' (../input.cpp:1288)
+
+
+
+units lj
+atom_style full
+#pair_style lj/cut 2.5
+boundary p p p
+
+#region simbox block -50 50 -50 50 -50 50
+#create_box 1 simbox
+read_data poly_in_iso.data
+Reading data file ...
+  orthogonal box = (-81 -81 -17.657) to (81 81 499.88)
+  1 by 1 by 1 MPI processor grid
+  reading atoms ...
+  1942 atoms
+  scanning bonds ...
+  1 = max bonds/atom
+  scanning angles ...
+  1 = max angles/atom
+  orthogonal box = (-81 -81 -17.657) to (81 81 499.88)
+  1 by 1 by 1 MPI processor grid
+  reading bonds ...
+  399 bonds
+  reading angles ...
+  398 angles
+Finding 1-2 1-3 1-4 neighbors ...
+  special bond factors lj:    0        0        0       
+  special bond factors coul:  0        0        0       
+     2 = max # of 1-2 neighbors
+     2 = max # of 1-3 neighbors
+     4 = max # of 1-4 neighbors
+     6 = max # of special neighbors
+  special bonds CPU = 0.000 seconds
+  read_data CPU = 0.009 seconds
+include ico_zone.lam
+region plane0 plane 5.95455565846428 0.0 2.9772778292321402 -0.4911234731884231 -0.35682208977308993 -0.7946544722917662
+region plane1 plane 1.8400588924169679 5.663118960624632 2.9772778292321402 0.18759247408507987 -0.5773502691896258 -0.7946544722917662
+region plane2 plane -4.817336721649107 3.500000000000001 2.9772778292321402 0.6070619982066862 -7.702562374674498e-17 -0.7946544722917661
+region plane3 plane -4.817336721649108 -3.4999999999999996 2.9772778292321402 0.18759247408507998 0.5773502691896257 -0.7946544722917662
+region plane4 plane 1.8400588924169665 -5.663118960624632 2.9772778292321402 -0.4911234731884229 0.35682208977309005 -0.7946544722917661
+region plane5 plane 5.95455565846428 0.0 2.9772778292321402 -0.7946544722917662 -0.5773502691896258 -0.1875924740850799
+region plane6 plane 1.8400588924169679 5.663118960624632 2.9772778292321402 0.3035309991033431 -0.9341723589627158 -0.18759247408507987
+region plane7 plane -4.817336721649107 3.500000000000001 2.9772778292321402 0.9822469463768461 -1.2463007722689438e-16 -0.18759247408507995
+region plane8 plane -4.817336721649108 -3.4999999999999996 2.9772778292321402 0.30353099910334325 0.9341723589627157 -0.18759247408507979
+region plane9 plane 1.8400588924169665 -5.663118960624632 2.9772778292321402 -0.7946544722917661 0.577350269189626 -0.18759247408507992
+region plane10 plane 4.817336721649107 3.500000000000001 -2.9772778292321394 -0.303530999103343 -0.9341723589627157 0.18759247408507984
+region plane11 plane -1.8400588924169679 5.663118960624632 -2.9772778292321394 0.7946544722917661 -0.5773502691896257 0.18759247408507987
+region plane12 plane -5.95455565846428 0.0 -2.9772778292321394 0.794654472291766 0.5773502691896257 0.1875924740850799
+region plane13 plane -1.8400588924169665 -5.663118960624632 -2.9772778292321394 -0.30353099910334325 0.9341723589627157 0.18759247408507987
+region plane14 plane 4.817336721649108 -3.4999999999999996 -2.9772778292321394 -0.9822469463768461 -1.2463007722689438e-16 0.18759247408507992
+region plane15 plane 4.817336721649107 3.500000000000001 -2.9772778292321394 -0.18759247408507987 -0.5773502691896258 0.7946544722917661
+region plane16 plane -1.8400588924169679 5.663118960624632 -2.9772778292321394 0.49112347318842303 -0.35682208977308993 0.794654472291766
+region plane17 plane -5.95455565846428 0.0 -2.9772778292321394 0.4911234731884231 0.3568220897730901 0.7946544722917661
+region plane18 plane -1.8400588924169665 -5.663118960624632 -2.9772778292321394 -0.18759247408507998 0.5773502691896257 0.794654472291766
+region plane19 plane 4.817336721649108 -3.4999999999999996 -2.9772778292321394 -0.6070619982066865 -7.7025623746745e-17 0.794654472291766
+region icoregion1 intersect 5 plane0 plane1 plane2 plane3 plane4
+region icoregion2 intersect 5 plane5 plane6 plane7 plane8 plane9
+region icoregion3 intersect 5 plane10 plane11 plane12 plane13 plane14
+region icoregion4 intersect 5 plane15 plane16 plane17 plane18 plane19
+region icoregion5 plane 0 0 5.605933389827808 0 0 -1
+region icoregion intersect 5 icoregion1 icoregion2 icoregion3 icoregion4 icoregion5
+include tail_zone.lam
+region tail_region cylinder z 0 0 1.25 5.605933389827808 15.605933389827808
+include ico_volume.lam
+variable volico equal 748.3213817843449
+variable voltail equal 49.08738521234052
+group poly type 1
+400 atoms in group poly
+group ico  type 2
+566 atoms in group ico
+group crow type 3
+976 atoms in group crow
+group poly1 id 1
+1 atoms in group poly1
+group poly400 id 400
+1 atoms in group poly400
+group Capsid dynamic poly region icoregion
+dynamic group Capsid defined
+group Tail dynamic poly region tail_region
+dynamic group Tail defined
+
+#change_box crowper boundary p p p
+#change_box all x final -50 50 y -50 50 z -50 70 boundary p p p
+
+#set group poly image 0 0 0
+
+#neighbor       4 bin
+neigh_modify   every 1 delay 0 check yes
+neigh_modify   exclude type 2 2
+neigh_modify   exclude type 1 3
+neigh_modify   exclude type 3 3
+neigh_modify   exclude type 2 3
+#for injection above
+
+
+include region_specify.lam
+region cylb cylinder z 0 0 0.65 0.6059333898278076 10.605933389827808
+region sphe1 sphere 0 0 0 5.605933389827808 side out
+region sphe2 sphere 0 0 0 6.605933389827808 side in
+region spheshell intersect 2 sphe1 sphe2
+region cyl1 intersect 2 spheshell cylb
+region cyl2 cylinder z 0 0 0.65 5.605933389827808 6.605933389827808
+#include sphere_region.lam
+
+#include        param-neutral-polymer-good.prm
+include        param_elec_hybrid.prm
+set group poly charge 0
+Setting atom values ...
+  400 settings made for charge
+#set group crow charge 0.1
+dielectric 1.0
+
+special_bonds	fene dihedral no
+Finding 1-2 1-3 1-4 neighbors ...
+  special bond factors lj:    0        1        1       
+  special bond factors coul:  0        1        1       
+     2 = max # of 1-2 neighbors
+     6 = max # of special neighbors
+  special bonds CPU = 0.000 seconds
+bond_style	fene
+bond_coeff      1 30.0 1.5 1.0 1.0
+
+include		angle_p.prm
+angle_style	cosine
+angle_coeff	1 0
+
+pair_style      lj/cut 1.122462048309373
+pair_modify	shift yes
+#kspace_style	ewald 1e-6
+
+pair_coeff      1 1 1.000000 1.000000 1.1220000000
+#pair_coeff      1 1 yukawa 0.17857142857
+pair_coeff      1 2 2.000000 1.000000 1.1220000000
+pair_coeff      1 3 1.000000 1.000000 1.1220000000
+#pair_coeff      1 3 coul/debye 3
+pair_coeff      2 2 0.000000 1.000000 1.1220000000
+pair_coeff      2 3 1.000000 1.000000 1.1220000000
+pair_coeff      3 3 1.000000 1.000000 1.1220000000
+#pair_coeff      3 3 coul/debye 3
+pair_coeff      1 3 0.000000 1.000000 1.1220000000
+#include 	param_elec_new.prm
+#include 	sample.prm
+velocity       all create 1.0 29425
+
+thermo 10000
+thermo_modify lost ignore
+thermo_modify lost/bond ignore
+timestep 0.001
+dump trajectory all atom 1000 dump_elec.lammpstrj
+
+#injection
+fix icofreeze ico setforce 0.0 0.0 0.0
+fix crowfreeze crow setforce 0.0 0.0 0.0
+#equiblration
+#fix injruneq poly nvt temp 0.5 0.6 1.0
+#fix bead400freeze poly400 setforce 0 0 0
+#run 200000
+#unfix injruneq
+#unfix bead400freeze
+variable caps_count equal count(Capsid)
+fix inmotor poly addforce 0 0 -80 region cyl2
+fix injrun poly nvt temp 1.0 1.0 1.0
+fix inp_tr1 all print 1000 "${caps_count}" append ini_count.txt screen yes
+fix ih1 all halt 1 v_caps_count > 391 error continue message yes
+
+run 2000000
+
+CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE
+
+Your simulation uses code contributions which should be cited:
+
+- Type Label Framework: https://doi.org/10.1021/acs.jpcb.3c08419
+
+@Article{Gissinger24,
+ author = {Jacob R. Gissinger, Ilia Nikiforov, Yaser Afshar, Brendon Waters, Moon-ki Choi, Daniel S. Karls, Alexander Stukowski, Wonpil Im, Hendrik Heinz, Axel Kohlmeyer, and Ellad B. Tadmor},
+ title = {Type Label Framework for Bonded Force Fields in LAMMPS},
+ journal = {J. Phys. Chem. B},
+ year =    2024,
+ volume =  128,
+ number =  13,
+ pages =   {3282--3297}
+}
+
+CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE-CITE
+
+Generated 0 of 3 mixed pair_coeff terms from geometric mixing rule
+WARNING: Communication cutoff 1.4220000000000002 is shorter than a bond length based estimate of 1.7550000000000001. This may lead to errors. (../comm.cpp:731)
+Neighbor list info ...
+  update: every = 1 steps, delay = 0 steps, check = yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 1.422
+  ghost atom cutoff = 1.422
+  binsize = 0.711, bins = 228 228 728
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair lj/cut, perpetual
+      attributes: half, newton on
+      pair build: half/bin/newton
+      stencil: half/bin/3d
+      bin: standard
+WARNING: Communication cutoff 1.4220000000000002 is shorter than a bond length based estimate of 1.7550000000000001. This may lead to errors. (../comm.cpp:731)
+4
+Per MPI rank memory allocation (min/avg/max) = 158.5 | 158.5 | 158.5 Mbytes
+   Step          Temp          E_pair         E_mol          TotEng         Press     
+         0   1              0              5.6537805      7.1530081     -0.00068830308
+4
+4
+4
+4
+4
+4
+4
+4
+4
+4
+     10000   1.0214214      3.988839e-05   5.0227347      6.5541177     -0.00035472768
+4
+4
+4
+4
+4
+4
+4
+4
+4
+4
+     20000   1.0137627      4.4892371e-05  4.360706       5.8806119     -0.00013507616
+6
+8
+10
+12
+15
+17
+19
+21
+23
+25
+     30000   1.0229992      0.00037257871  4.4922416      6.0263228     -0.00016257387
+27
+29
+31
+33
+35
+37
+39
+41
+43
+45
+     40000   1.0223836      0.00033746898  4.552609       6.0857322     -0.00021669921
+47
+49
+50
+52
+54
+55
+57
+59
+60
+62
+     50000   1.0245884      0.00024124558  4.4877308      6.0240633     -0.00017762692
+63
+65
+66
+68
+70
+72
+74
+75
+77
+79
+     60000   1.0223339      0.00034703668  4.4431193      5.9761776     -0.00012957957
+81
+83
+85
+87
+89
+91
+93
+95
+97
+99
+     70000   1.0239303      0.00012548137  4.4487998      5.9840299     -0.00012977299
+101
+103
+105
+107
+109
+110
+112
+114
+116
+118
+     80000   1.0246904      0.00025676391  4.4247616      5.9612625     -0.00011592152
+120
+122
+124
+126
+128
+130
+132
+134
+136
+138
+     90000   1.0254051      0.0013195709   4.3972457      5.9358808     -9.6657489e-05
+140
+142
+144
+147
+149
+151
+153
+155
+157
+159
+    100000   1.0293969      0.00040658434  4.3832541      5.9269608     -7.1292286e-05
+162
+164
+166
+168
+170
+173
+175
+177
+179
+181
+    110000   1.0306973      0.00094533286  4.3631208      5.909316      -4.8348918e-05
+184
+186
+188
+190
+193
+195
+197
+200
+202
+204
+    120000   1.027611       0.0022763476   4.3408942      5.8837933     -3.2728689e-05
+207
+209
+212
+214
+217
+219
+221
+224
+226
+229
+    130000   1.0330485      0.0012928846   4.3251848      5.8752526     -5.121478e-06 
+232
+234
+237
+239
+242
+244
+247
+250
+253
+255
+    140000   1.0381271      0.0015983689   4.2955916      5.8535789      1.5557833e-05
+258
+261
+264
+267
+270
+273
+276
+278
+281
+284
+    150000   1.043571       0.00248029     4.2637781      5.8308088      6.4353177e-05
+288
+291
+294
+298
+301
+304
+307
+311
+315
+318
+    160000   1.0511077      0.0068212785   4.2434893      5.8261603      8.0506341e-05
+322
+326
+330
+333
+337
+342
+346
+351
+355
+360
+    170000   1.0777267      0.013467885    4.2293248      5.8585503      0.00013352863
+366
+372
+378
+385
+Fix halt condition for fix-id ih1 met on step 174692 with value 392 (../fix_halt.cpp:240)
+Loop time of 97.0589 on 1 procs for 174692 steps with 1942 atoms
+
+Performance: 155507.589 tau/day, 1799.856 timesteps/s, 3.495 Matom-step/s
+93.2% CPU use with 1 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 1.0468     | 1.0468     | 1.0468     |   0.0 |  1.08
+Bond    | 1.8159     | 1.8159     | 1.8159     |   0.0 |  1.87
+Neigh   | 78.743     | 78.743     | 78.743     |   0.0 | 81.13
+Comm    | 6.5113     | 6.5113     | 6.5113     |   0.0 |  6.71
+Output  | 0.24474    | 0.24474    | 0.24474    |   0.0 |  0.25
+Modify  | 8.097      | 8.097      | 8.097      |   0.0 |  8.34
+Other   |            | 0.6        |            |       |  0.62
+
+Nlocal:           1942 ave        1942 max        1942 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:              0 ave           0 max           0 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:           1804 ave        1804 max        1804 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 1804
+Ave neighs/atom = 0.92893924
+Ave special neighs/atom = 0.41091658
+Neighbor list builds = 4955
+Dangerous builds = 0
+unfix ih1
+#unfix beadfreeze1
+unfix inp_tr1
+unfix inmotor
+unfix crowfreeze
+unfix injrun
+#unfix equilbrator
+
+
+#equilibriation
+neigh_modify   exclude none
+neigh_modify   exclude type 2 2
+include sphere_region.lam
+region spheAc sphere 0 0 95.60693338982782 80 side out
+region spheB sphere 0 0 95.60693338982782 79.95 side in
+region spheA sphere 0 0 95.60693338982782 80 side in
+region spheBc sphere 0 0 95.60693338982782 79.95 side out
+region cylA cylinder z 0 0 1.25 11.105933389827808 21.105933389827808 side in
+region cylB cylinder z 0 0 0.75 11.105933389827808 21.105933389827808 side in
+region shell union 3 spheAc spheB cylA
+region shell1 union 3 spheAc spheB cylB
+fix wall all wall/region shell lj126 3.0 1.0 1.22
+pair_coeff      1 3 1.000000 1.000000 1.1220000000
+velocity       all create 1.0 29425
+fix beadfreeze1 poly1 setforce 0.0 0.0 0.0
+min_modify     dmax 0.001
+minimize       1e-28 1e-28 1000 100000000
+Generated 0 of 3 mixed pair_coeff terms from geometric mixing rule
+WARNING: Communication cutoff 1.4220000000000002 is shorter than a bond length based estimate of 1.7550000000000001. This may lead to errors. (../comm.cpp:731)
+Per MPI rank memory allocation (min/avg/max) = 160.7 | 160.7 | 160.7 Mbytes
+   Step          Temp          E_pair         E_mol          TotEng         Press     
+    174692   1              0.053156326    4.2368302      5.7892141      0.00020971969
+    175424   1              0              4.1507863      5.6500139      0.0001429072 
+Loop time of 0.175515 on 1 procs for 732 steps with 1942 atoms
+
+97.7% CPU use with 1 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = energy tolerance
+  Energy initial, next-to-last, final = 
+      4.28998651723697   4.15078627813494   4.15078627813494
+  Force two-norm initial, final = 817.22746 1.3100863e-05
+  Force max component initial, final = 177.00063 4.5595003e-06
+  Final line search alpha, max atom move = 1 4.5595003e-06
+  Iterations, force evaluations = 732 941
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.0091904  | 0.0091904  | 0.0091904  |   0.0 |  5.24
+Bond    | 0.0095755  | 0.0095755  | 0.0095755  |   0.0 |  5.46
+Neigh   | 0.04184    | 0.04184    | 0.04184    |   0.0 | 23.84
+Comm    | 0.027921   | 0.027921   | 0.027921   |   0.0 | 15.91
+Output  | 0.00083283 | 0.00083283 | 0.00083283 |   0.0 |  0.47
+Modify  | 0.054946   | 0.054946   | 0.054946   |   0.0 | 31.31
+Other   |            | 0.03121    |            |       | 17.78
+
+Nlocal:           1942 ave        1942 max        1942 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:              0 ave           0 max           0 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:           1830 ave        1830 max        1830 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 1830
+Ave neighs/atom = 0.9423275
+Ave special neighs/atom = 0.41091658
+Neighbor list builds = 3
+Dangerous builds = 0
+fix equilibrator poly nvt temp 1.0 1.0 1.0
+run 300
+Generated 0 of 3 mixed pair_coeff terms from geometric mixing rule
+WARNING: Communication cutoff 1.4220000000000002 is shorter than a bond length based estimate of 1.7550000000000001. This may lead to errors. (../comm.cpp:731)
+Per MPI rank memory allocation (min/avg/max) = 159.6 | 159.6 | 159.6 Mbytes
+   Step          Temp          E_pair         E_mol          TotEng         Press     
+    175424   1              0              4.1507863      5.6500139      0.0001429072 
+    175724   0.93014118     0.055262947    4.2147988      5.664555       0.00019114889
+Loop time of 0.104474 on 1 procs for 300 steps with 1942 atoms
+
+Performance: 248100.502 tau/day, 2871.534 timesteps/s, 5.577 Matom-step/s
+98.7% CPU use with 1 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.0027207  | 0.0027207  | 0.0027207  |   0.0 |  2.60
+Bond    | 0.0025829  | 0.0025829  | 0.0025829  |   0.0 |  2.47
+Neigh   | 0.066527   | 0.066527   | 0.066527   |   0.0 | 63.68
+Comm    | 0.00010234 | 0.00010234 | 0.00010234 |   0.0 |  0.10
+Output  | 1.7792e-05 | 1.7792e-05 | 1.7792e-05 |   0.0 |  0.02
+Modify  | 0.031694   | 0.031694   | 0.031694   |   0.0 | 30.34
+Other   |            | 0.0008285  |            |       |  0.79
+
+Nlocal:           1942 ave        1942 max        1942 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:              0 ave           0 max           0 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:           1804 ave        1804 max        1804 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 1804
+Ave neighs/atom = 0.92893924
+Ave special neighs/atom = 0.41091658
+Neighbor list builds = 5
+Dangerous builds = 0
+unfix equilibrator
+unfix beadfreeze1
+
+#equilibrium beads
+fix polyfreeze poly setforce 0.0 0.0 0.0
+fix equilibrator_1 crow nvt temp 1.0 1.0 1.0
+run 20000
+Generated 0 of 3 mixed pair_coeff terms from geometric mixing rule
+WARNING: Communication cutoff 1.4220000000000002 is shorter than a bond length based estimate of 1.7550000000000001. This may lead to errors. (../comm.cpp:731)
+Per MPI rank memory allocation (min/avg/max) = 159.6 | 159.6 | 159.6 Mbytes
+   Step          Temp          E_pair         E_mol          TotEng         Press     
+    175724   0.93014118     0.055262947    4.2147988      5.664555       0.00019114889
+    180000   0.93034853     0.055262947    4.2147988      5.6648659      0.00019117852
+    190000   0.94774215     0.056067054    4.2147988      5.691747       0.0001944921 
+    195724   0.94166839     0.055329109    4.2147988      5.6819031      0.00019293962
+Loop time of 8.96296 on 1 procs for 20000 steps with 1942 atoms
+
+Performance: 192793.555 tau/day, 2231.407 timesteps/s, 4.333 Matom-step/s
+97.6% CPU use with 1 MPI tasks x no OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.15867    | 0.15867    | 0.15867    |   0.0 |  1.77
+Bond    | 0.17065    | 0.17065    | 0.17065    |   0.0 |  1.90
+Neigh   | 5.7461     | 5.7461     | 5.7461     |   0.0 | 64.11
+Comm    | 0.57504    | 0.57504    | 0.57504    |   0.0 |  6.42
+Output  | 0.017808   | 0.017808   | 0.017808   |   0.0 |  0.20
+Modify  | 2.2372     | 2.2372     | 2.2372     |   0.0 | 24.96
+Other   |            | 0.0575     |            |       |  0.64
+
+Nlocal:           1942 ave        1942 max        1942 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:              0 ave           0 max           0 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:           1797 ave        1797 max        1797 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 1797
+Ave neighs/atom = 0.92533471
+Ave special neighs/atom = 0.41091658
+Neighbor list builds = 423
+Dangerous builds = 0
+unfix equilibrator_1
+unfix polyfreeze
+
+
+#production
+include motor_f.prm
+fix motor poly addforce 0 0 5 region cyl2
+fix integrator1 poly nvt temp 1.0 1.0 1.0
+fix integrator2 crow nvt temp 1.0 1.0 1.0
+
+#pressure_capsid
+compute p1 Capsid stress/atom NULL
+compute p2 Capsid reduce sum c_p1[1] c_p1[2] c_p1[3]
+variable press_capsid equal -(c_p2[1]+c_p2[2]+c_p2[3])/(3*${volico})
+variable press_capsid equal -(c_p2[1]+c_p2[2]+c_p2[3])/(3*748.321381784345)
+fix p3 all print 1000 "${press_capsid}" append capsid_pressure.txt screen no
+
+#pressure_tail
+compute p4 Tail stress/atom NULL
+compute p5 Tail reduce sum c_p4[1] c_p4[2] c_p4[3]
+variable press_tail equal -(c_p5[1]+c_p5[2]+c_p5[3])/(3*${voltail})
+variable press_tail equal -(c_p5[1]+c_p5[2]+c_p5[3])/(3*49.0873852123405)
+fix p6 all print 1000 "${press_tail}" append tail_pressure.txt screen no
+
+#com
+compute cm1 poly com
+variable cmpos equal sqrt((c_cm1[1])^2+(c_cm1[2])^2+(c_cm1[3])^2)
+fix cm2 all print 1000 "${cmpos}" append dist_com.txt screen no
+
+#net velocity_z
+compute cv1 poly property/atom vz
+compute cv2 poly reduce sum c_cv1
+variable netvz equal c_cv2
+fix cv3 all print 1000 "${netvz}" append netvz.txt screen no
+
+#net force_z
+compute cf1 poly property/atom fz
+compute cf2 poly reduce sum c_cf1
+variable netfz equal c_cf2
+fix cf3 all print 1000 "${netfz}" append netfz.txt screen no
+
+variable capsid_loc equal (401-count(Capsid))
+variable capsid_locp equal (400-count(Capsid))
+#variable capsid_loc
+variable capsid_loc1 equal (402-count(Capsid))
+variable capsid_loc2 equal (403-count(Capsid))
+variable tail_loc equal (401-count(Tail)-count(Capsid))
+variable tail_loc1 equal (411-count(Tail)-count(Capsid))
+
+#compute in_capsid poly chunk/atom type region icoregion compress yes
+#compute in_tail poly chunk/atom type region tail_region compress yes
+
+#compute in_capsid1 poly property/chunk in_capsid id
+
+
+#variable capsid_loc vector c_in_capsid
+#variable tail_loc vector c_in_tail
+
+
+#force_capsid
+#compute f1 Capsid property/atom fx fy fz
+#variable force_capsid equal sqrt((c_f1[v_capsid_loc][1])^2+(c_f1[v_capsid_loc][2])^2+(c_f1[v_capsid_loc][3])^2)
+#fix f2 all print 1000 "${force_capsid}" append capsid_force.txt screen no
+
+#force_tail
+#compute f3 Tail property/atom fx fy fz
+#variable force_tail equal sqrt((c_f3[v_tail_loc][1])^2+(c_f3[v_tail_loc][2])^2+(c_f3[v_tail_loc][3])^2)
+#fix f4 all print 1000 "${force_tail}" append tail_force.txt screen no
+
+#velocity_capsid
+#compute v1 Capsid property/atom vx vy vz
+#variable vel_capsid equal sqrt((C_v1[v_capsid_loc][1])^2+(C_v1[v_capsid_loc][2])^2+(C_v1[v_capsid_loc][3])^2)
+#fix v2 all print 1000 "${vel_capsid}" append capsid_velocity.txt screen no
+
+
+#velocity_tail
+#compute v3 Tail property/atom vx vy vz
+#variable vel_tail equal sqrt((c_v3[v_tail_loc][1])^2+(c_v3[v_tail_loc][2])^2+(c_v3[v_tail_loc][3])^2)
+#fix v4 all print 1000 "${vel_tail}" append tail_velocity.txt screen no
+
+
+compute rad1 Capsid property/atom x y
+variable rd1 equal sqrt((C_rad1[v_capsid_loc][1])^2+(C_rad1[v_capsid_loc][2])^2)
+variable rd2 equal sqrt((C_rad1[v_capsid_loc1][1])^2+(C_rad1[v_capsid_loc1][2])^2)
+variable rd3 equal sqrt((C_rad1[v_capsid_loc2][1])^2+(C_rad1[v_capsid_loc2][2])^2)
+fix rad2 all print 1000 "${rd1} ${rd2} ${rd3}" append exit_radial_dist.txt screen no
+
+#packing fraction
+variable pack1 equal count(Capsid)
+fix pa1 all print 1000 "${pack1}" append pack_fraction.txt screen yes
+
+#rdf
+#compute rdf1 Capsid rdf
+
+
+#energy
+compute epp1 poly pe/atom pair
+compute epp2 poly pe/atom bond
+compute epp3 poly pe/atom angle
+compute ecc1 Capsid pe/atom pair
+compute ecc2 Capsid pe/atom bond
+compute ecc3 Capsid pe/atom angle
+compute ett1 Tail pe/atom pair
+compute ett2 Tail pe/atom bond
+compute ett3 Tail pe/atom angle
+compute ep1 poly reduce sum c_epp1
+compute ep2 poly reduce sum c_epp2
+compute ep3 poly reduce sum c_epp3
+compute ec1 Capsid reduce sum c_ecc1
+compute ec2 Capsid reduce sum c_ecc2
+compute ec3 Capsid reduce sum c_ecc3
+compute et1 Tail reduce sum c_ett1
+compute et2 Tail reduce sum c_ett2
+compute et3 Tail reduce sum c_ett3
+variable ep1 equal c_ep1
+variable ep2 equal c_ep2
+variable ep3 equal c_ep3
+variable ec1 equal c_ec1
+variable ec2 equal c_ec2
+variable ec3 equal c_ec3
+variable et1 equal c_et1
+variable et2 equal c_et2
+variable et3 equal c_et3
+fix ep all print 1000 "${ep1} ${ep2} ${ep3}" append poly_energy.txt screen no
+fix ec all print 1000 "${ec1} ${ec2} ${ec3}" append caps_energy.txt screen no
+fix et all print 1000 "${et1} ${et2} ${et3}" append tail_energy.txt screen no
+
+#angle of approach
+#variable av_beads equal count(Capsid)
+#if "${av_beads} > 1"
+#compute a1 Capsid property/atom x y z
+#variable capsid_loc equal (401-count(Capsid))
+#variable pos1 atom c_a1[370]
+#variable pos2 atom c_a1[371]
+#variable theta equal acos((v_pos1[3]-v_pos2[3])/((v_pos1[1]-v_pos2[1])^2+(v_pos1[2]-v_pos2[2])^2+(v_pos1[3]-v_pos2[3])^2))
+#fix a2 all print 1000 "${theta}" append angle_approach.txt screen no
+#variable capsid_loc delete
+#variable capsid_loc1 delete
+
+#angle_of_approach
+compute an1 poly property/atom x
+compute an2 poly property/atom y
+compute an3 poly property/atom z
+variable x1 equal C_an1[v_capsid_locp]
+variable y1 equal C_an2[v_capsid_locp]
+variable z1 equal C_an3[v_capsid_locp]
+variable x2 equal C_an1[v_capsid_loc]
+variable y2 equal C_an2[v_capsid_loc]
+variable z2 equal C_an3[v_capsid_loc]
+variable mag12 equal (sqrt(((v_x1-v_x2)^2)+((v_y1-v_y2)^2)+((v_z1-v_z2)^2)))
+variable theta equal (180/PI)*(acos((v_z1-v_z2)/v_mag12))
+
+fix an4 all print 1000 "${theta}" append angle_approach.txt screen no
+
+#trajectories
+compute tr poly property/atom x y z
+variable x50 equal C_tr[50][1]
+variable y50 equal C_tr[50][2]
+variable z50 equal C_tr[50][3]
+variable x150 equal C_tr[150][1]
+variable y150 equal C_tr[150][2]
+variable z150 equal C_tr[150][3]
+variable x250 equal C_tr[250][1]
+variable y250 equal C_tr[250][2]
+variable z250 equal C_tr[250][3]
+variable x350 equal C_tr[350][1]
+variable y350 equal C_tr[350][2]
+variable z350 equal C_tr[350][3]
+fix tr1 all print 1000 "${x50} ${y50} ${z50}" append xyz_50.txt screen no
+fix tr2 all print 1000 "${x150} ${y150} ${z150}" append xyz_150.txt screen no
+fix tr3 all print 1000 "${x250} ${y250} ${z250}" append xyz_250.txt screen no
+fix tr4 all print 1000 "${x350} ${y350} ${z350}" append xyz_350.txt screen no
+
+
+#dump trajectory all atom 1000 dump_elec.lammpstrj
+fix h1 all halt 1 v_pack1 < 1 error continue message yes
+run 1500000
+Generated 0 of 3 mixed pair_coeff terms from geometric mixing rule
+WARNING: Communication cutoff 1.4220000000000002 is shorter than a bond length based estimate of 1.7550000000000001. This may lead to errors. (../comm.cpp:731)
+Per MPI rank memory allocation (min/avg/max) = 162.2 | 162.2 | 162.2 Mbytes
+   Step          Temp          E_pair         E_mol          TotEng         Press     
+    195724   0.94166839     0.055329109    4.2147988      5.6819031      0.00019293962
+391
+388
+387
+385
+382
+    200000   1.0363548      0.069256911    4.2426052      5.8655938      0.00024835463
+381
+380
+379
+378
+376
+375
+375
+375
+375
+374
+    210000   0.98404761     0.060551878    4.2589584      5.7948216      0.00025485757
+374
+373
+373
+372
+370
+368
+367
+366
+365
+364
+    220000   1.0179217      0.050830981    4.2621051      5.8390324      0.00019314012
+364
+363
+363
+363
+363
+363
+362
+361
+359
+358
+    230000   1.0105327      0.033741017    4.25454        5.8032996      0.00019723173
+357
+356
+355
+354
+354
+353
+352
+351
+350
+349
+    240000   1.0014056      0.043991563    4.2723027      5.8176293      0.0001867804 
+349
+348
+346
+345
+343
+342
+341
+340
+339
+338
+    250000   1.0276418      0.034731166    4.2590795      5.8344796      0.00018928976
+337
+336
+334
+334
+333
+332
+331
+331
+332
+331
+    260000   0.9990601      0.0327936      4.2600307      5.7906428      0.00018777384
+331
+332
+331
+331
+331
+330
+330
+330
+329
+329
+    270000   1.0029469      0.036408663    4.2597615      5.7998158      0.00018430942
+328
+327
+326
+326
+325
+324
+323
+322
+321
+321
+    280000   1.0066399      0.038274801    4.2571751      5.8046322      0.0001978923 
+321
+319
+320
+320
+319
+319
+319
+319
+319
+319
+    290000   1.0172177      0.03661756     4.2544214      5.8160799      0.00016828877
+318
+318
+318
+318
+319
+319
+319
+318
+317
+316
+    300000   1.0072825      0.03529607     4.268381       5.8138227      0.00017323853
+315
+315
+315
+315
+314
+314
+313
+313
+312
+311
+    310000   1.0168111      0.035027261    4.2586787      5.8181372      0.00019910953
+310
+309
+308
+308
+307
+306
+306
+305
+304
+303
+    320000   0.98655339     0.028073656    4.2681102      5.775252       0.000178325  
+303
+302
+301
+301
+301
+301
+300
+299
+298
+297
+    330000   1.0044838      0.02343436     4.249604       5.7789882      0.00017282414
+297
+296
+296
+295
+294
+293
+293
+291
+291
+290
+    340000   1.0008085      0.033773003    4.2657595      5.7999722      0.00017897573
+290
+290
+289
+288
+289
+288
+289
+289
+288
+288
+    350000   1.0115854      0.028279498    4.2592405      5.8041168      0.00015164769
+287
+285
+285
+284
+283
+284
+283
+283
+283
+283
+    360000   0.97663974     0.025179927    4.25734        5.7467252      0.000154797  
+282
+283
+282
+282
+281
+280
+279
+277
+277
+276
+    370000   1.001165       0.021037262    4.2528079      5.7748194      0.00013914955
+275
+274
+274
+273
+272
+270
+270
+269
+268
+268
+    380000   1.001761       0.025206898    4.2653452      5.7924199      0.00016226296
+269
+268
+268
+267
+266
+265
+265
+264
+263
+263
+    390000   1.003891       0.024675903    4.2505568      5.7802938      0.000134372  
+262
+261
+260
+259
+258
+258
+257
+256
+255
+254
+    400000   0.98925629     0.021722155    4.2527073      5.7575497      0.00016517331
+254
+254
+254
+254
+254
+254
+254
+254
+254
+253
+    410000   0.98277557     0.020464926    4.2468369      5.7407061      0.00014750504
+252
+251
+250
+249
+248
+247
+247
+247
+248
+247
+    420000   0.98659434     0.026127811    4.2581042      5.7633614      0.0001320332 
+247
+247
+246
+246
+245
+245
+244
+244
+243
+243
+    430000   0.99059374     0.017391142    4.2699496      5.7724663      0.00013751082
+243
+242
+241
+241
+240
+239
+239
+238
+237
+237
+    440000   1.005387       0.017701687    4.258472       5.7834776      0.00013285127
+237
+236
+235
+235
+234
+233
+232
+231
+231
+231
+    450000   1.0022524      0.015268729    4.2527882      5.7706614      0.00011332209
+230
+229
+229
+228
+229
+228
+228
+228
+227
+227
+    460000   1.01153        0.011915979    4.2691116      5.7975412      0.0001308161 
+227
+226
+226
+226
+226
+226
+225
+226
+226
+226
+    470000   1.0045777      0.014704535    4.2718504      5.7926455      0.00015570525
+226
+226
+226
+225
+226
+225
+225
+225
+224
+225
+    480000   0.98854674     0.017577841    4.2513139      5.7509483      0.00012642433
+225
+224
+224
+223
+223
+223
+222
+221
+221
+220
+    490000   0.96748435     0.016628955    4.2529018      5.72001        0.00014600835
+220
+219
+218
+218
+218
+218
+218
+217
+217
+216
+    500000   1.0050894      0.013793918    4.2532978      5.7739495      0.00014322973
+215
+215
+215
+214
+214
+213
+212
+211
+210
+209
+    510000   1.0015593      0.016965508    4.2628454      5.7813762      0.00012411103
+208
+207
+207
+206
+206
+207
+206
+206
+205
+205
+    520000   0.99790487     0.010028843    4.2409041      5.7470195      0.00011044776
+204
+204
+203
+203
+203
+203
+204
+203
+203
+204
+    530000   0.98538341     0.013154182    4.2508193      5.7412875      0.00015054983
+203
+203
+202
+202
+202
+202
+202
+203
+202
+202
+    540000   1.0018601      0.012253377    4.263365       5.7776347      0.00012868933
+201
+200
+200
+199
+199
+199
+198
+198
+197
+197
+    550000   1.0042112      0.015412904    4.2618141      5.7827681      0.00012812333
+196
+196
+195
+195
+194
+194
+194
+194
+194
+194
+    560000   0.99543087     0.02089831     4.2483388      5.7616145      0.00013898707
+194
+193
+194
+193
+193
+193
+192
+191
+191
+190
+    570000   0.97390968     0.011162051    4.24989        5.7211644      0.00014050934
+190
+191
+191
+190
+190
+190
+190
+189
+188
+189
+    580000   0.98626711     0.01169584     4.2657577      5.7560925      0.00013394797
+188
+187
+187
+187
+186
+187
+186
+185
+186
+185
+    590000   1.0017004      0.01210485     4.2651747      5.7790564      0.00010406989
+185
+186
+186
+186
+185
+185
+185
+185
+185
+185
+    600000   0.99566693     0.0134909      4.2580892      5.7643115      0.0001387247 
+184
+183
+183
+182
+181
+181
+182
+182
+182
+182
+    610000   1.0335566      0.016205236    4.260075       5.8258167      0.00013727276
+181
+181
+181
+180
+181
+180
+179
+177
+177
+177
+    620000   0.99049655     0.018978283    4.2662642      5.7702223      0.00012266043
+178
+177
+178
+177
+178
+177
+176
+176
+176
+175
+    630000   0.96870099     0.011214302    4.2512791      5.7147967      0.00013038337
+175
+174
+174
+173
+173
+174
+174
+173
+173
+172
+    640000   0.99029464     0.0061966081   4.2664817      5.7573553      0.0001274979 
+171
+171
+170
+170
+169
+169
+169
+169
+169
+168
+    650000   0.9844954      0.013476259    4.2553646      5.7448236      0.00012493909
+167
+166
+166
+165
+164
+164
+163
+162
+162
+161
+    660000   1.0428258      0.014196465    4.2570496      5.8346793      0.00013477633
+162
+161
+161
+161
+161
+161
+160
+160
+160
+160
+    670000   1.0122542      0.012358725    4.2544581      5.7844163      0.00012276531
+159
+160
+160
+159
+160
+159
+160
+159
+159
+158
+    680000   1.0012966      0.009490913    4.2575545      5.768217       0.00013357762
+158
+159
+159
+159
+159
+158
+157
+156
+156
+155
+    690000   0.98424259     0.0083100387   4.2684932      5.7524069      0.0001131603 
+154
+153
+152
+151
+151
+151
+152
+151
+150
+149
+    700000   0.98396641     0.013066067    4.2588633      5.7471189      0.0001205209 
+149
+148
+148
+147
+147
+146
+145
+145
+145
+145
+    710000   1.0065327      0.012838937    4.249132       5.7709925      0.00013400561
+145
+145
+144
+144
+144
+145
+144
+144
+143
+143
+    720000   0.97962336     0.0096795985   4.2575841      5.7359421      0.00011496178
+144
+143
+143
+143
+143
+142
+142
+143
+143
+142
+    730000   0.99018247     0.014520226    4.266569       5.7655981      0.00012307638
+143
+142
+141
+141
+141
+141
+141
+141
+141
+140
+    740000   0.99613291     0.011391145    4.2585432      5.7633643      0.00011844094
+141
+141
+140
+140
+139
+139
+138
+138
+138
+137
+    750000   1.0102639      0.013260995    4.2641489      5.7920255      0.00013892169
+136
+136
+136
+135
+135
+135
+134
+135
+135
+134
+    760000   1.0153286      0.0075676443   4.2548692      5.7846455      0.00011568171
+135
+135
+135
+135
+134
+134
+134
+133
+133
+132
+    770000   0.97378609     0.0082426451   4.2516463      5.719816       0.0001324429 
+131
+130
+129
+129
+130
+129
+129
+128
+128
+128
+    780000   0.98074085     0.0086850952   4.2771606      5.7561995      0.00011565611
+127
+127
+126
+127
+126
+126
+126
+127
+126
+126
+    790000   1.0001084      0.022941753    4.2584281      5.7807601      0.00014806349
+125
+125
+126
+126
+125
+125
+125
+124
+125
+125
+    800000   0.97366809     0.0078641557   4.2619875      5.7296017      0.00010620353
+124
+125
+125
+124
+125
+125
+124
+124
+123
+123
+    810000   0.9959117      0.012301113    4.263528       5.7689274      0.00015588074
+123
+122
+122
+122
+122
+121
+120
+120
+120
+119
+    820000   0.99259211     0.016303856    4.2658229      5.7702482      0.00013699252
+120
+120
+119
+119
+120
+119
+118
+119
+118
+118
+    830000   1.0376665      0.01310154     4.2628393      5.8316391      0.00015991252
+118
+119
+119
+118
+118
+118
+117
+118
+118
+117
+    840000   1.0187117      0.0062191987   4.2548534      5.7883533      0.00011160433
+118
+118
+117
+117
+117
+118
+118
+118
+117
+118
+    850000   0.98330307     0.017666422    4.2695468      5.7614083      0.00010196122
+118
+117
+117
+117
+117
+116
+116
+115
+115
+116
+    860000   1.001353       0.007526829    4.2596118      5.7683947      0.0001206072 
+115
+114
+114
+114
+114
+113
+114
+113
+113
+112
+    870000   1.0060266      0.011096208    4.2607556      5.7801146      0.00013308325
+112
+113
+112
+113
+113
+113
+113
+112
+111
+110
+    880000   0.99559242     0.012497679    4.2683725      5.7734898      0.00012488177
+110
+111
+110
+109
+108
+109
+109
+108
+108
+108
+    890000   0.99911966     0.0092746339   4.2487032      5.7558856      0.00012187588
+108
+109
+108
+109
+108
+108
+108
+107
+106
+106
+    900000   1.0076062      0.0083834762   4.2450242      5.7640388      0.00012673507
+105
+104
+103
+103
+102
+103
+102
+103
+102
+102
+    910000   0.9934427      0.013898189    4.2674837      5.7707786      0.00010666481
+103
+102
+103
+102
+102
+101
+101
+101
+100
+100
+    920000   0.98013522     0.0097912756   4.2618088      5.7410459      0.00013018019
+101
+101
+101
+101
+101
+101
+101
+100
+100
+101
+    930000   0.97888438     0.007043683    4.2690596      5.7436738      0.00013652037
+101
+101
+100
+100
+99
+99
+99
+98
+98
+98
+    940000   0.99725082     0.01584314     4.2497202      5.7606693      0.00011537082
+99
+99
+98

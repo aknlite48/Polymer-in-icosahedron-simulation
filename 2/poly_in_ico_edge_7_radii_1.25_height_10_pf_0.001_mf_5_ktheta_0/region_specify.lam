@@ -1,0 +1,6 @@
+region cylb cylinder z 0 0 0.65 0.6059333898278076 10.605933389827808
+region sphe1 sphere 0 0 0 5.605933389827808 side out
+region sphe2 sphere 0 0 0 6.605933389827808 side in
+region spheshell intersect 2 sphe1 sphe2
+region cyl1 intersect 2 spheshell cylb
+region cyl2 cylinder z 0 0 0.65 5.605933389827808 6.605933389827808

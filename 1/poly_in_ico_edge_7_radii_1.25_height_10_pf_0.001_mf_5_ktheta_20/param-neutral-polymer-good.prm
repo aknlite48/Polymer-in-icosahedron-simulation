@@ -1,0 +1,36 @@
+bond_style	 harmonic
+bond_coeff      1 500.0 1.12
+
+#type 1 polymer particle
+#type 2 crowder particle
+#type 3 icosahedron wall particle
+#type 4 ico_vertex particle
+#type 5 ico_facecent particle
+
+pair_style      lj/cut 1.122462048309373 
+pair_modify     shift yes
+
+pair_coeff      1 1 1.000000 1.000000 1.1220000000
+pair_coeff      1 2 1.000000 1.000000 1.1220000000
+pair_coeff      1 3 1.000000 1.000000 1.1220000000
+pair_coeff      2 2 1.000000 1.000000 1.1220000000
+pair_coeff      2 3 1.000000 1.000000 1.1220000000
+pair_coeff      3 3 1.000000 1.000000 1.1220000000
+
+#pair_coeff      1 4 5.000000 1.000000 2.50000000
+#pair_coeff      1 5 5.000000 1.000000 2.50000000
+
+
+#pair_coeff      2 4 1.000000 1.000000 1.1220000000
+#pair_coeff      2 5 1.000000 1.000000 1.1220000000
+
+
+#pair_coeff      3 4 1.000000 1.000000 1.1220000000
+#pair_coeff      3 5 1.000000 1.000000 1.1220000000
+
+#pair_coeff      4 4 1.000000 1.000000 1.1220000000
+#pair_coeff      4 5 1.000000 1.000000 1.1220000000
+
+#pair_coeff      5 5 1.000000 1.000000 1.1220000000
+
+#special_bonds  lj 0.0 1.0 1.0 angle yes dihedral yes
